@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Online Rock Paper Scissors!</title>
+	
+	<!-- Web Includes -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyBQKeWQFNZ3i9J25XRGJZT6tLbOBe-39x0",
+	    authDomain: "rock-paper-scissors-9e99f.firebaseapp.com",
+	    databaseURL: "https://rock-paper-scissors-9e99f.firebaseio.com",
+	    storageBucket: "rock-paper-scissors-9e99f.appspot.com",
+	    messagingSenderId: "114890479639"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+	<!-- RPS style sheet and scripts -->
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<script type="text/javascript" src="assets/js/scripts.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Rock Paper Scissors Online!</a>
+	    </div>
+		    <!-- <ul class="nav navbar-nav">
+		      <li class="active"><a href="#">Home</a></li>
+		      <li><a href="#">Page 1</a></li>
+		      <li><a href="#">Page 2</a></li>
+		      <li><a href="#">Page 3</a></li>
+		    </ul> -->
+	  	</div>
+	</nav>
+  	<!-- Main body -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-centered main-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5 col-centered text-center">
+							<div class="hands">
+								<h2 class="red" id="playerOne-name">Player 1</h1>
+								<div id="player-one" choice =""><i class="fa fa-question-circle-o fa-lg" aria-hidden="true"></i></div>
+								<h3 id="player-one-status">Open</h3>				
+							</div>
+						</div><div class="col-md-2 col-centered text-center">
+							<div class="hands">
+								<h2 id="versus">VS.</h2>
+							</div>
+						</div>
+						<div class="col-md-5 col-centered text-center">
+							<div class="hands">
+								<h2 class="blue" id="playerOne-name">Player 2</h1>
+								<div id="player-two" choice =""><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></div>
+								<h3 id="player-two-status">Open</h3>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="col-centered text-center">
+					<h3>Choose your weapon.</h3>
+					<br>
+					<button class="btn btn-primary btn-lg" choice="rock" id="rock"><i class="fa fa-hand-rock-o" aria-hidden="true"></i></button>
+					<button class="btn btn-info btn-lg" choice="paper" id="paper"><i class="fa fa-hand-paper-o" aria-hidden="true"></i></button>
+					<button class="btn btn-danger btn-lg" choice="scissors" id="scissors"><i class="fa fa-hand-scissors-o" aria-hidden="true"></i></button>
+				</div>
+			</div>
+			<div class="col-md-3 col-centered main-body leader-board text-center">
+				<h3>Leader Board</h3>
+				<ol>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ol>
+			</div>
+		</div>
+		
+	</div>
+
+</body>
+</html>
