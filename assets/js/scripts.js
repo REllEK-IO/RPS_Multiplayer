@@ -47,6 +47,9 @@ var reset = function(){
 	var timer = setTimeout(function(){
 		printResult("");
 		clearInterval(interval);
+
+		buttonsInit();
+
 		$("#versus").html("VS");
 		$("#result").removeClass();
 
@@ -131,31 +134,78 @@ var getSymbol = function(hand){
 	}
 }
 
+var rockPaperScissors = function(){
+	var playerOneChoice = $("#player-one").attr("choice");
+	var playerTwoChoice = $("#player-two").attr("choice");
+
+	if(playerOneChoice !== "" && playerTwoChoice !== ""){
+
+		buttonsClear();
+
+		var rps = ["Rock...", "Paper...", "Scissors...", "Shoot!!!"];
+		var rpsColor = ["blue", "teal", "red", "black"];
+		var i = 0;
+
+		$("#versus").html(rps[i]);
+		$("#versus").addClass(rpsColor[i]);
+		var rpsInterval = setInterval(function(){
+			i++;
+			$("#versus").html(rps[i]);
+			$("#versus").removeClass();
+			$("#versus").addClass(rpsColor[i]);
+		}, 1000);
+
+		var showTimer = setTimeout(function(){
+			$("#versus").removeClass();
+			clearInterval(rpsInterval);
+			winCondition();
+			$("#player-one").children().removeClass("fa-question-circle-o");
+			$("#player-one").children().addClass(getSymbol(playerOneChoice));
+			$("#player-two").children().removeClass("fa-question-circle");
+			$("#player-two").children().addClass(getSymbol(playerTwoChoice));
+		}, 4000);
+	}
+}
+
 var testLogic = function(hand){
 	var userChoice = hand;
 	if($("#player-one").attr("choice") === "" && $("#player-two").attr("choice") === ""){
 		$("#player-one").attr("choice", userChoice);
-		$("#player-one").children().removeClass("fa-question-circle-o");
-		$("#player-one").children().addClass(getSymbol(userChoice));
 	}
 	else if($("#player-one").attr("choice") !== "" && $("#player-two").attr("choice") === ""){
 		$("#player-two").attr("choice", userChoice);
-		$("#player-two").children().removeClass("fa-question-circle");
-		$("#player-two").children().addClass(getSymbol(userChoice));
+		rockPaperScissors();
 	}
-	winCondition();
 }
 
-$(document).ready(function(){
-	//var thisGame = game();
-
+var buttonsInit = function(){
 	$("#rock").click(function(){
 		testLogic("rock");
 	});
+	$("#rock").removeClass("silverbg");
+
 	$("#paper").click(function(){
 		testLogic("paper");
 	});
+	$("#paper").removeClass("silverbg");
+
 	$("#scissors").click(function(){
 		testLogic("scissors");
 	});
+	$("#scissors").removeClass("silverbg");
+}
+
+var buttonsClear = function(){
+	$("#rock").off();
+	$("#rock").addClass("silverbg");
+	$("#paper").off();
+	$("#paper").addClass("silverbg");
+	$("#scissors").off();
+	$("#scissors").addClass("silverbg");
+}
+
+$(document).ready(function(){
+	
+	buttonsInit();
+
 });
