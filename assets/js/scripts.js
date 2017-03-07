@@ -24,21 +24,40 @@ var database = firebase.database();
 // 	this.scissors = false;
 // }
 
+var printResult = function(message, color){
+	$("#result").html(message);
+	$("#result").addClass(color);
+}
+
 var reset = function(){
 	playerOneSymbol = getSymbol($("player-one").attr("choice"));
 	playerTwoSymbol = getSymbol($("player-two").attr("choice"));
 
+
 	console.log("Reset: " + playerOneSymbol + " " + playerTwoSymbol);
+	var intervalCount = 3;
+
+	$("#versus").html(intervalCount);
+
+	var interval = setInterval(function(){
+		intervalCount--;
+		$("#versus").html(intervalCount);
+	}, 1000);
 
 	var timer = setTimeout(function(){
+		printResult("");
+		clearInterval(interval);
+		$("#versus").html("VS");
+		$("#result").removeClass();
+
 		$("#player-one").attr("choice", "");
-		$("#player-one").removeClass(playerOneSymbol);
-		$("#player-one").children().addClass("fa-question-circle-o");
+		$("#player-one").children().removeClass();
+		$("#player-one").children().addClass("fa fa-question-circle-o fa-lg");
 		
 		$("#player-two").attr("choice", "");
-		$("#player-two").removeClass(playerTwoSymbol);
-		$("#player-two").children().addClass("fa-question-circle");
-	}, 5000);
+		$("#player-two").children().removeClass();
+		$("#player-two").children().addClass("fa fa-question-circle fa-lg");
+	}, 3000);
 }
 
 var winCondition = function(){
@@ -48,47 +67,47 @@ var winCondition = function(){
 	if(playerOne !== "" && playerTwo !== ""){
 		if(playerOne === "rock" && playerTwo === "rock")
 		{
-			console.log("Tie!");
+			printResult("Tie!" , "teal");
 			reset();
 		}
 		else if(playerOne === "rock" && playerTwo === "paper")
 		{
-			console.log("Player Two Wins!");
+			printResult("Player Two Wins!", "blue");
 			reset();
 		}
 		else if(playerOne === "rock" && playerTwo === "scissors")
 		{
-			console.log("Player One Wins!");
+			printResult("Player One Wins!", "red");
 			reset();
 		}
 		else if(playerOne === "paper" && playerTwo === "rock")
 		{
-			console.log("Player One Wins!");
+			printResult("Player One Wins!", "red");
 			reset();
 		}
 		else if(playerOne === "paper" && playerTwo === "paper")
 		{
-			console.log("Tie!");
+			printResult("Tie!", "teal");
 			reset();
 		}
 		else if(playerOne === "paper" && playerTwo === "scissors")
 		{
-			console.log("Player Two Wins!");
+			printResult("Player Two Wins!", "blue");
 			reset();
 		}
 		else if(playerOne === "scissors" && playerTwo === "rock")
 		{
-			console.log("Player Two Wins!");
+			printResult("Player Two Wins!", "blue");
 			reset();
 		}
 		else if(playerOne === "scissors" && playerTwo === "paper")
 		{
-			console.log("Player One Wins!");
+			printResult("Player One Wins!", "red");
 			reset();
 		}
 		else if(playerOne === "scissors" && playerTwo === "scissors")
 		{
-			console.log("Tie!");
+			printResult("Tie!", "teal");
 			reset();
 		}
 	}
